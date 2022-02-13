@@ -13,7 +13,9 @@ def encrypt(plain_text, shift_amount):
     for letter in plain_text:
         position = alphabets.index(letter)
         new_position = position+shift_amount
-        encrypted_letter = alphabet[new_position]
+        if new_position >= 26:
+            new_position = 26 - new_position
+        encrypted_letter = alphabets[new_position]
         cipher_text += encrypted_letter
     print(f"The encoded text is {cipher_text}.")
 
@@ -24,8 +26,14 @@ def dycrypt(cipher_text, shift_amount):
     for letter in cipher_text:
         position = alphabets.index(letter)
         new_position = position-shift_amount
-        dycrypted_letter = alphabet[new_position]
+        if new_position >= 26:
+            new_position = 26 - new_position
+        dycrypted_letter = alphabets[new_position]
         plain_text += dycrypted_letter
     print(f"The decoded text is {plain_text}.")
 
+if directions == "encode":
+    encrypt(text, shift)
 
+elif directions == "decode":
+    dycrypt(text, shift)
